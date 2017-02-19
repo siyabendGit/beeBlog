@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Entries</title>
+<style type="text/css">
+/* make sidebar nav vertical */
+@media ( min-width : 768px) {
+	.sidebar-nav .navbar .navbar-collapse {
+		padding: 0;
+		max-height: none;
+	}
+	.sidebar-nav .navbar ul {
+		float: none;
+		display: block;
+	}
+	.sidebar-nav .navbar li {
+		float: none;
+		display: block;
+	}
+	.sidebar-nav .navbar li a {
+		padding-top: 12px;
+		padding-bottom: 12px;
+	}
+	form {
+		width: 100%;
+		border: 0;
+		padding: 0;
+		margin: 0;
+	}
+	.field {
+		width: 100%;
+		border: 0;
+		padding: 0;
+		margin: 0;
+	}
+}
+</style>
+
+<title>Bootstrap Case</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+</head>
+<body>
+	<h4 align="left" style="color: green">Enter your details here</h4>
+
+	{% if form.errors %} {{ form.errors }} {{ form.non_field_errors }}
+	<p style="color: red;">Please correct the error{{
+		form.errors|pluralize }} below.</p>
+	{% endif %}
+
+	<div class="col-sm-3 col-md-3">
+		<div class="sidebar-nav">
+			<div class="navbar navbar-default" role="navigation">
+				<form id="form_id" class="nav navbar-nav" action="" method="post">
+					<h5>FILTER</h5>
+					<div class="panel-group" id="accordion">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion"
+										href="#collapse1">Contact</a>
+								</h4>
+							</div>
+							<div id="collapse1" class="panel-collapse collapse in">
+								<div class="panel-body">
+									<fieldset class="field" id="general">
+										<div class="field" class="panel-body">
+											{{ form.email.errors }} <label class="label label-primary"
+												for="id_email">Your e-mail address:</label> {{ form.email }}
+										</div>
+										<div class="field" class="panel-body">
+											<label class="label label-primary" for="id_subject">Subject</label>
+											{{ form.subject }}
+										</div>
+									</fieldset>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordion"
+											href="#collapse2">Input</a>
+									</h4>
+								</div>
+								<div id="collapse2" class="panel-collapse collapse">
+									<div class="panel-body">
+										<div class="field">
+											<label class="label label-primary" for="id_tax">Tax %</label>
+											{{ form.tax }}
+										</div>
+										<div class="field">
+											<label class="label label-primary" for="id_rent">Rent</label>
+											{{ form.rent }}
+										</div>
+										<div class="field">
+											<label class="label label-primary" for="id_staff_salary">Staff
+												salary:</label> {{ form.staff_salary }}
+										</div>
+										<div class="field">
+											<label class="label label-primary" for="id_staffcount">Staff
+												count:</label> {{ form.staff_count }}
+										</div>
+										<div class="field">
+											<label class="label label-primary" for="id_electricity">Electricity
+												expense:</label> {{ form.electricity }}
+										</div>
+										<div class="field">
+											<label class="label label-primary" for="id_income">Income:</label>
+											{{ form.income }}
+										</div>
+
+									</div>
+									{% csrf_token %} <input type="submit" value="Submit">
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div id="success_div" class="col-md-6">
+		<h1>Your results</h1>
+
+		<script type="text/javascript"
+			src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js"></script>
+		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+		<script type="text/javascript"
+			src="https://www.gstatic.com/charts/loader.js"></script>
+		<script type="text/javascript">
+			google.load("visualization", "1", {
+				packages : [ "corechart" ]
+			});
+		</script>
+		<script type="text/javascript">
+			$(document)
+					.ready(
+							function() {
+								$("#form_id")
+										.submit(
+												function(e) {
+													e.preventDefault(); // avoid to execute the actual submit of the form.
+													$
+															.ajax({
+																type : "POST",
+																url : '',
+																dataType : "html",
+																data : $(
+																		"#form_id")
+																		.serialize(), // serializes the form's elements.
+																success : function(data) {
+																	$('body').append(data);
+																}
+															});
+												});
+							});
+		</script>
+	<button onClick="window.location.reload()">Clear results</button>
+	</div>
+	<script type="text/javascript"
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		type="text/javascript"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,196 @@
+<html>
+<head>
+	<title>Entries</title>
+<style>
+/* make sidebar nav vertical */ 
+@media (min-width: 768px) {
+  .sidebar-nav .navbar .navbar-collapse {
+    padding: 0;
+    max-height: none;
+  }
+  .sidebar-nav .navbar ul {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li a {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  form {
+  width: 100%;
+  border:0;
+  padding:0;
+  margin:0;
+  }
+  .field {
+  width: 100%;
+  border:0;
+  padding:0;
+  margin:0;
+  }
+}
+</style>
+
+  <title>Bootstrap Case</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<h2 align="center"  style="color:green" >Enter your details here</h2>
+	
+    {% if form.errors %}
+	{{ form.errors }}
+    {{ form.non_field_errors }}
+    <p style="color: red;">
+            Please correct the error{{ form.errors|pluralize }} below.
+        </p>
+    {% endif %}
+ <div class="col-sm-3 col-md-3" >
+ <div class="sidebar-nav">
+ <div class="navbar navbar-default" role="navigation">
+ <form  id="form_id" class="nav navbar-nav" action="" method="post">
+  <h5>FILTER</h5>
+ <div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Contact</a>
+        </h4>
+      </div>
+      <div id="collapse1" class="panel-collapse collapse in">
+        <div class="panel-body">
+		      <fieldset class="field" id="general">
+        <div class="field" class="panel-body">
+            {{ form.email.errors }}
+            <label class="label label-primary" for="id_email">Your e-mail address:</label>
+            {{ form.email }}
+        </div>
+		<div class="field" class="panel-body">
+            <label class="label label-primary" for="id_subject">Subject</label>
+            {{ form.subject }}
+        </div>      
+      </fieldset>
+	  </div>
+	  </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Input</a>
+        </h4>
+      </div>
+      <div id="collapse2" class="panel-collapse collapse">
+        <div class="panel-body">
+		        <div class="field">
+            <label class="label label-primary" for="id_tax">Tax %</label>
+            {{ form.tax }}
+        </div> 
+		<div class="field">
+            <label class="label label-primary" for="id_rent">Rent</label>
+            {{ form.rent }}
+        </div>
+        <div class="field">
+            <label class="label label-primary" for="id_staff_salary">Staff salary:</label>
+            {{ form.staff_salary }}
+        </div>
+        <div class="field">
+            <label class="label label-primary" for="id_staffcount">Staff count:</label>
+            {{ form.staff_count }}
+        </div>
+		<div class="field">
+            <label class="label label-primary" for="id_electricity">Electricity expense:</label>
+            {{ form.electricity }}
+        </div>
+		<div class="field">
+            <label class="label label-primary" for="id_income">Income:</label>
+            {{ form.income }}
+        </div> 
+<!--         <div class="field">
+            <label for="id_ort">Ort</label>
+            {{ form.ort }}
+        </div>     --> 
+		</div>
+	    {% csrf_token %}
+        <input type="submit" value="Submit">
+ </div>
+ </div>
+  </div>
+  </div>
+<!--   </div> -->
+<!--   </div> -->
+  </form>
+  </div>
+  </div>
+  </div>
+<div class="col-sm-9 col-md-9" id="success_div"> 
+<div  id="piechart"></div>
+<h1>Your results</h1>
+</div>
+<div id="error_div"></div>
+
+<button> Save </button>
+<button onclick="getElementById('/busybee/business/')">Clear</button>
+
+
+<!-- <script type="text/javascript">
+$.noConflict();
+
+$(document).ready(function() {
+	$('#form_id').submit(function (event) {
+	    event.preventDefault(); // Prevent the form from submitting via the browser
+		var jsonData= $.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+            data: frm.serialize(),
+            success: function (data) {
+            	// Create our data table out of JSON data loaded from server.
+            	var data = google.visualization.arrayToDataTable(jsonData);
+            	// Instantiate and draw our chart, passing in some options.
+            	var chart = new google.visualization.PieChart(document.getElementById('success_div'));
+            	chart.draw(data, {width: 400, height: 240});
+            },
+            error: function(data) {
+                $("error_div").html("Something went wrong!");
+            }
+        });
+        return false;
+    });
+
+};
+
+</script> -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+		
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Work',     11],
+          ['Eat',      2],
+          ['Commute',  2],
+          ['Watch TV', 2],
+          ['Sleep',    7]
+        ]);
+
+        var options = {
+          title: 'My Daily Activities'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js"></script>
+
+</body>
+</html>
