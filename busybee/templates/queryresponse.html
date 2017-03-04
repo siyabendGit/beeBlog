@@ -4,8 +4,9 @@
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js"></script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <div class="btn-group">
-<button id="beeIndex" class="btn btn-success active" title="Bra tillfälle!">ROI :{{beeIndex}} <span id="beeIndexSpan" class="glyphicon glyphicon-star"></span></button>
-<button src="static/gold.jpg"></button>
+{% load static %}
+<button id="beeIndex" class="btn btn-success active" title="Bra tillfälle!">ROI :{{beeIndex}} <span id="beeIndexSpan" class="glyphicon glyphicon-star"></span>
+<img id="advantage" src="{% static "gold.jpg" %}" title="Guld gruva!" height="35" width="42 alt="Golden"/></button>
 <button class="btn btn-default" onClick="window.location.reload()">Clear results</button>
 <button type="reset" class="btn btn-default">Reset filter</button>	
 </div>				

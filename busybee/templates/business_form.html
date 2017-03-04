@@ -50,8 +50,8 @@
 		form.errors|pluralize }} below.</p>
 	{% endif %}
 
-	<div class="col-sm-3 col-md-3">
-		<div class="sidebar-nav">
+	<div class="col-sm-3 col-md-3" style="background-color:green;">
+		<div class="sidebar-nav" >
 			<div class="navbar navbar-default" role="navigation">
 
 				<form id="form_id" class="nav navbar-nav" action="" method="post">
@@ -97,7 +97,7 @@
 												class="input-group-addon" title="Thusen SEK">{{ form.staff_salary }}</span>
 										</div>
 										<div class="form-group input-group">
-											<span class="input-group-addon">Employees nr</span> <span
+											<span class="input-group-addon">Employees</span> <span
 												class="input-group-addon">{{ form.staff_count}}</span>
 										</div>
 
@@ -114,9 +114,30 @@
 												class="input-group-addon" title="Thusen SEK">{{ form.income }}</span>
 										</div>
 									</div>
-									{% csrf_token %} <input type="submit" value="Submit">
 								</div>
+							<div class="panel panel-default">								
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordion"
+											href="#collapse3">Details </a>
+									</h4>
+								</div>
+								<div id="collapse3" class="panel-collapse collapse">
+									<div class="panel-body">
+										<div class="form-group input-group">
+											<span class="input-group-addon">Expense 1</span> <span
+												class="input-group-addon"  title="Thusen SEK">10</span>
+										</div>
+										<div class="form-group input-group">
+											<span class="input-group-addon" >Expense 2 </span> 
+											<span class="input-group-addon" title="Thusen SEK">10</span>
+										</div>
+									</div>
+								 </div>			
+								 </div>					
+									{% csrf_token %} <input class="btn btn-primary active" type="submit" value="Submit">								
 							</div>
+						
 						</div>
 					</div>
 				</form>
@@ -125,7 +146,7 @@
 	</div>
 
 
-	<div id="success_div" class="col-md-9">
+	<div id="success_div" class="col-md-9" >
 		<h1>Your results</h1>
 
 		<script type="text/javascript"
