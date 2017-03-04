@@ -14,42 +14,36 @@ from django.http import JsonResponse
 def busybee(request):
     return HttpResponse("You're at the busybee page.")
 
+def forms(request):
+    return render(request, 'forms.html')
+
 def business(request):
     if request.method == 'POST':
         form = BusinessForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
             result = calc_result(cd)
-            _, expenses = result.popitem()
             _, income = result.popitem()
+            _, expenses = result.popitem()
             result= income - expenses  
-            xdata = ["Activity", "income", "expenses", "result"]
-            ydata = [11,income, expenses, result]
-
-            rawdata = [xdata,ydata]
-            chart = BarChart(SimpleDataSource(data=rawdata))
-            context = {'chart': chart}
+            beeIndex= (result/expenses)
+            beeIndex = round(beeIndex, 3)
             if request.is_ajax():
-                #return HttpResponse("1:1")    
                 array =[
                     ['Activity', 'Parcel'],
-                    ['income',     income],
-                    ['expenses',      expenses],
+                    ['income',   income],
+                    ['expenses', expenses],
                     ['result',  result]
                     ];         
-                #return HttpResponse(json.dumps(to_json), content_type='application/json')           
-                #return JsonResponse({"data":"1","dat":"2"})
-                return render(request, 'queryresponse.html', {'array':array})
+
+                return render(request, 'queryresponse.html', {'array':array,'beeIndex':beeIndex})
             else:
-                return HttpResponse("Still not an ajax request")               
-# Chart object
+                return HttpResponse("Not complete as ajax request")               
         else:    
             return HttpResponse("Please provide valid values.")
     else:
         form = BusinessForm()
         return render(request, 'business_form.html', {'form':form})
-
-
 
 def calc_result(cd):
 

@@ -123,6 +123,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(STATIC_ROOT, 'stylesheets'),
-	'C:/Users/SIYA/beeSite/static/busybee',
-	'C:/Users/SIYA/beeSite/static/admin',
+	'C:/Users/SIYA/workspace_sedat/beeSite/static/busybee',
+	'C:/Users/SIYA/workspace_sedat/beeSite/static/admin',
+    'C:/Users/SIYA/workspace_sedat/beeSite/beeSite/images',    
 )

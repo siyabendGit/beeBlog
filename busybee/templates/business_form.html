@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <title>Entries</title>
 <style type="text/css">
 /* make sidebar nav vertical */
@@ -44,8 +45,6 @@
 
 </head>
 <body>
-	<h4 align="left" style="color: green">Enter your details here</h4>
-
 	{% if form.errors %} {{ form.errors }} {{ form.non_field_errors }}
 	<p style="color: red;">Please correct the error{{
 		form.errors|pluralize }} below.</p>
@@ -54,9 +53,11 @@
 	<div class="col-sm-3 col-md-3">
 		<div class="sidebar-nav">
 			<div class="navbar navbar-default" role="navigation">
+
 				<form id="form_id" class="nav navbar-nav" action="" method="post">
-					<h5>FILTER</h5>
-					<div class="panel-group" id="accordion">
+					<h5 style="color: blue; position: center; fill: green">ENTER
+						DETAILS OF BUSINESS</h5>
+					<div class="panel-group" id="accordion navbar-nav">
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h4 class="panel-title">
@@ -82,36 +83,36 @@
 								<div class="panel-heading">
 									<h4 class="panel-title">
 										<a data-toggle="collapse" data-parent="#accordion"
-											href="#collapse2">Input</a>
+											href="#collapse2">Input </a>
 									</h4>
 								</div>
 								<div id="collapse2" class="panel-collapse collapse">
 									<div class="panel-body">
-										<div class="field">
-											<label class="label label-primary" for="id_tax">Tax %</label>
-											{{ form.tax }}
+										<div class="form-group input-group">
+											<span class="input-group-addon">Rent </span> <span
+												class="input-group-addon" title="Thusen SEK"> {{form.rent }}</span>
 										</div>
-										<div class="field">
-											<label class="label label-primary" for="id_rent">Rent</label>
-											{{ form.rent }}
+										<div class="form-group input-group">
+											<span class="input-group-addon">Employee Salary </span> <span
+												class="input-group-addon" title="Thusen SEK">{{ form.staff_salary }}</span>
 										</div>
-										<div class="field">
-											<label class="label label-primary" for="id_staff_salary">Staff
-												salary:</label> {{ form.staff_salary }}
-										</div>
-										<div class="field">
-											<label class="label label-primary" for="id_staffcount">Staff
-												count:</label> {{ form.staff_count }}
-										</div>
-										<div class="field">
-											<label class="label label-primary" for="id_electricity">Electricity
-												expense:</label> {{ form.electricity }}
-										</div>
-										<div class="field">
-											<label class="label label-primary" for="id_income">Income:</label>
-											{{ form.income }}
+										<div class="form-group input-group">
+											<span class="input-group-addon">Employees nr</span> <span
+												class="input-group-addon">{{ form.staff_count}}</span>
 										</div>
 
+										<div class="form-group input-group">
+											<span class="input-group-addon">Tax %</span> <span
+												class="input-group-addon">{{ form.tax }}</span>
+										</div>
+										<div class="form-group input-group">
+											<span class="input-group-addon">Electricity $</span> <span
+												class="input-group-addon" title="Thusen SEK">{{ form.electricity }}</span>
+										</div>
+										<div class="form-group input-group">
+											<span class="input-group-addon">Income %</span> <span
+												class="input-group-addon" title="Thusen SEK">{{ form.income }}</span>
+										</div>
 									</div>
 									{% csrf_token %} <input type="submit" value="Submit">
 								</div>
@@ -122,7 +123,9 @@
 			</div>
 		</div>
 	</div>
-	<div id="success_div" class="col-md-6">
+
+
+	<div id="success_div" class="col-md-9">
 		<h1>Your results</h1>
 
 		<script type="text/javascript"
@@ -136,29 +139,25 @@
 			});
 		</script>
 		<script type="text/javascript">
-			$(document)
-					.ready(
-							function() {
-								$("#form_id")
-										.submit(
-												function(e) {
-													e.preventDefault(); // avoid to execute the actual submit of the form.
-													$
-															.ajax({
-																type : "POST",
-																url : '',
-																dataType : "html",
-																data : $(
-																		"#form_id")
-																		.serialize(), // serializes the form's elements.
-																success : function(data) {
-																	$('body').append(data);
-																}
-															});
-												});
-							});
+			$(document).ready(function() {
+				$("#form_id").on("submit", function(e) {
+					e.preventDefault(); // avoid to execute the actual submit of the form.
+					e.stopImmediatePropagation();
+					$.ajax({
+						type : "POST",
+						url : '',
+						dataType : "html",
+						data : $(this).serialize(), // serializes the form's elements.
+						success : function(data) {
+							$('body').append(data);
+						}
+					});
+
+					return false;
+				});
+			});
 		</script>
-	<button onClick="window.location.reload()">Clear results</button>
+		<button onClick="window.location.reload()">Clear results</button>
 	</div>
 	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -167,5 +166,4 @@
 		type="text/javascript"></script>
 
 </body>
-
 </html>

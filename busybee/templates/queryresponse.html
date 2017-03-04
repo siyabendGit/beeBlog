@@ -1,19 +1,50 @@
-    <html xmlns="http://www.w3.org/1999/xhtml">
-		<script type="text/javascript"
-			src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js"></script>
-		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-      <!--  {{chart.as_html}} -->
-    <script type="text/javascript">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<div class="btn-group">
+<button id="beeIndex" class="btn btn-success active" title="Bra tillfälle!">ROI :{{beeIndex}} <span id="beeIndexSpan" class="glyphicon glyphicon-star"></span></button>
+<button src="static/gold.jpg"></button>
+<button class="btn btn-default" onClick="window.location.reload()">Clear results</button>
+<button type="reset" class="btn btn-default">Reset filter</button>	
+</div>				
+<script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
 
         var data = google.visualization.arrayToDataTable({{ array|safe }});
         var options = {
-          title: 'My Daily Activities'
+          title: 'Business Insider'
         };
-       var chart = new google.visualization.PieChart(document.getElementById('success_div'));
+       var chart = new google.visualization.ColumnChart(document.getElementById('success_div'));
         chart.draw(data, options);
       }
     </script>
-    </html>
+<script type="text/javascript">
+if ({{beeIndex}} <0 ) {
+	$("#beeIndex").removeClass("btn-success").addClass("btn-danger").attr("title","Ingen bra deal!");
+	$("#beeIndexSpan").removeClass("glyphicon-star").addClass("glyphicon-remove");
+	$("#roidescription").removeClass("hidden");
+}
+else if ({{beeIndex}} <1 ) {
+	$("#beeIndex").removeClass("btn-success").addClass("btn-warning").attr("title","Värd att prova!");
+	$("#beeIndexSpan").removeClass("glyphicon-star").addClass("glyphicon-ok")
+	}
+</script>
+<div>
+	<dl id="roidescription" class="dl-horizontal hidden">
+		<dd class="col-sm-6">What is 'Return On Investment - ROI' A
+			performance measure used to evaluate the efficiency of an investment
+			or to compare the efficiency of a number of different investments.
+			ROI measures the amount of return on an investment relative to the
+			investment’s cost. To calculate ROI, the benefit (or return) of an
+			investment is divided by the cost of the investment, and the result
+			is expressed as a percentage or a ratio. The return on investment
+			formula: return on investment = Net income / Investment where: Net
+			income = gross profit − expenses. investment = stock + market
+			outstanding + claims.</dd>
+	</dl>
+</div>
+</html>

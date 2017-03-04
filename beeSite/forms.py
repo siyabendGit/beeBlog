@@ -18,14 +18,14 @@ class BusinessForm(forms.Form):
     email = forms.EmailField(required=True,initial="mail@mail.com")
     
     #Expenses
-    rent = forms.IntegerField(widget=forms.NumberInput,initial=10)
-    staff_salary = forms.IntegerField(widget=forms.NumberInput,initial=10)
-    staff_count = forms.IntegerField(widget=forms.NumberInput,initial=10)
-    electricity = forms.IntegerField(widget=forms.NumberInput,initial=10)
-    tax = forms.IntegerField(widget=forms.NumberInput,initial=10)
+    rent = forms.IntegerField(widget=forms.NumberInput,initial=10, help_text="Thusen SEK")
+    staff_salary = forms.IntegerField(widget=forms.NumberInput,initial=10, help_text="Thusen SEK")
+    staff_count = forms.IntegerField(widget=forms.NumberInput,initial=10, help_text= "Expected number of employees")
+    electricity = forms.IntegerField(widget=forms.NumberInput,initial=10, help_text="Thusen SEK")
+    tax = forms.IntegerField(widget=forms.NumberInput,initial=10, help_text="Tax rate")
 
     #Incomes
-    income = forms.IntegerField(widget=forms.NumberInput,initial=10)
+    income = forms.IntegerField(widget=forms.NumberInput,initial=10, help_text="Thusen SEK")
     
     #Details
     #ort_choices = (('1', 'Stockholm',), ('2', 'Uppsala',))
