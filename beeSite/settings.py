@@ -125,5 +125,6 @@ STATICFILES_DIRS = (
     os.path.join(STATIC_ROOT, 'stylesheets'),
 	'C:/Users/SIYA/workspace_sedat/beeSite/static/busybee',
 	'C:/Users/SIYA/workspace_sedat/beeSite/static/admin',
-    'C:/Users/SIYA/workspace_sedat/beeSite/beeSite/images',    
+    'C:/Users/SIYA/workspace_sedat/beeSite/beeSite/images',
+    'C:/Users/SIYA/workspace_sedat/beeSite/beeSite/js',       
 )
